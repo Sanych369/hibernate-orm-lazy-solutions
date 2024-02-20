@@ -1,6 +1,7 @@
 package test.project.repository;
 
 //import com.cosium.spring.data.jpa.entity.graph.domain2.EntityGraph; //uncomment for test solution2
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -23,4 +24,8 @@ public interface ParentRepository extends JpaRepository<ParentEntity, Long> {
     //solution3 JPQL
 //        @Query("Select p from ParentEntity p join fetch p.childrenEntitySet c where p.parentId = :id")
 //        ParentEntity fetchParentEntityAndChild(@Param("id") Long id);
+
+//    solution4 GRAPH
+    @EntityGraph(attributePaths = {"childrenEntitySet"}, type = EntityGraph.EntityGraphType.LOAD)
+    ParentEntity getParentEntityByParentId(Long id);
 }

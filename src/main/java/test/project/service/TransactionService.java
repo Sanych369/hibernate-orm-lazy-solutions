@@ -54,7 +54,8 @@ public class TransactionService {
      * @return ParentEntity
      */
     public ParentEntity startParentWithChild() {
-        return parentRepository.findById(PARENT_ID).orElse(null);
+        return parentRepository
+                .getParentEntityByParentId(PARENT_ID); //solution4
 
 
 //                .fetchParentEntityAndChild(PARENT_ID); //uncomment for test solution1
